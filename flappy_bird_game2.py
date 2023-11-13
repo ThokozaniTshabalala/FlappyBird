@@ -33,9 +33,8 @@ flappy_bird_logo = pygame.transform.scale(original_logo, (logo_width, logo_heigh
 def draw_welcome_screen():
     screen.blit(background_image, (0, 0))  # Blit the resized background image
     screen.blit(flappy_bird_logo, ((width - logo_width) // 2, (height - logo_height) // 2))  # Center the logo
-
 def draw_button():
-    button_rect = pygame.Rect(width // 2 - 50, (height // 2 + logo_height // 2)+40, 100, 50)
+    button_rect = pygame.Rect(width // 2 - 50, (height // 2 + logo_height // 2) + 40, 100, 50)
     pygame.draw.rect(screen, white, button_rect)
     
     text = font.render("Start", True, black)
@@ -55,6 +54,11 @@ def handle_events(events):
             button_rect = pygame.Rect(width // 2 - 50, height // 2 + logo_height // 2, 100, 50)
             if button_rect.collidepoint(mouse_x, mouse_y):
                 current_state = GAME_SCREEN
+                start_game()
+
+# Function to start the Flappy Bird game
+def start_game():
+    subprocess.Popen(["python", "flappy_bird_game.py"])
 
 # Game loop
 running = True
@@ -72,6 +76,3 @@ while running:
         pygame.display.flip()
 
     pygame.time.Clock().tick(60)
-
-
-
